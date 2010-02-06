@@ -1,0 +1,7 @@
+; $Id: ucd.info
+name = "Ubercart displays"
+description = "Extended Ubercart node build and display modes"
+core = "6.x"
+dependencies[] = ds
+dependencies[] = uc_product
+package = "Display suite"

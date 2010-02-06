@@ -1,0 +1,7 @@
+; $Id $
+name = "ND search"
+description = "Search support for node displays"
+core = "6.x"
+dependencies[] = nd
+dependencies[] = search
+package = "Display suite"
