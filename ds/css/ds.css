@@ -109,6 +109,10 @@ tr.region-css-disabled  {
 /**
  * Dashboard layout
  */
+.ds-dashboard-region {
+  display: none;
+}
+ 
 #ds-db-region-header {
   clear: both;
   width: 100%;

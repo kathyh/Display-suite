@@ -23,7 +23,7 @@ $(document).ready(
 	  },
 	  
 	  onStop : function() {
-	    $.iAutoscroller.stop();
+	    $.iAutoscroller.stop();		
 	  }
 	});
   }
@@ -43,6 +43,18 @@ var toggleContent = function(e) {
 };
 
 function saveLayoutSettings() {
-	serial = $.SortSerialize();
-};
-
+  var settings = $.SortSerialize();
+  var regions = settings.o;
+  var build_mode = $('#edit-build-mode').val();
+  for (region in regions) {
+	var region_value = region.replace('ds-db-region-', '');
+	var fields = regions[region];
+	for (var i = 0; i < fields.length; i++) {
+	  var field_replace = fields[i].replace("_", "-"); 
+	  var weight_id = 'edit-'+ field_replace +'-ds-weight';
+	  var region_id = 'edit-'+ field_replace +'-'+ build_mode +'-region';
+	  $('#'+ weight_id).val(i);
+  	  $('#'+ region_id).val(region_value);
+    }
+  }
+}

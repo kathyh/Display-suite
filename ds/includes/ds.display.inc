@@ -120,6 +120,12 @@ function ds_display_overview_form(&$form_state, $type, $build_mode = 'full', $mo
     '#layout' => $layout,
    );
 
+   // Hidden build mode.
+   $form['build_mode'] = array(
+     '#type' => 'hidden',
+     '#value' => $build_mode,
+   );
+
   // Extra info.
   if (isset($api_info['extra'])) {
     $types = $api_info['types']();
@@ -148,6 +154,7 @@ function ds_display_overview_form(&$form_state, $type, $build_mode = 'full', $mo
   );
   if ($layout == 'dashboard') {
     $form['submit']['#attributes'] = array('onClick' => 'saveLayoutSettings()');
+    $form['#redirect'] = array($_GET['q'], array('layout' => '1'));
   }
 
   return $form;

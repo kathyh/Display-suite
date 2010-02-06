@@ -13,7 +13,7 @@ print $dev_preview;
 
 <!-- of course we will remove this message later on -->
 Developer preview of dashboard style - this is not included in an official release yet.
-This is experimental code you which can find on <a href="http://github.com/swentel/Display-suite">http://github.com/swentel/Display-suite</a>
+This is development code which you can find on <a href="http://github.com/swentel/Display-suite">http://github.com/swentel/Display-suite</a>
 
 <div id="ds-display-content">
   <?php if (!empty($plugins_tabs)): ?>
@@ -37,7 +37,7 @@ This is experimental code you which can find on <a href="http://github.com/swent
         if (!empty($rows[$region])):
           $count = 0;
           foreach ($rows[$region] as $row): ?>
-            <div id="<?php $row->field_id; ?>" class="groupItem">
+            <div id="<?php print $row->field_id; ?>" class="groupItem">
               <div class="itemHeader"><?php print $row->human_name; ?><a href="#" class="closeEl">[+]</a></div>
               <div class="itemContent" style="display: none">
                 <?php
@@ -45,8 +45,8 @@ This is experimental code you which can find on <a href="http://github.com/swent
                   print $row->{$build_mode}->label_edit;
                   print $row->{$build_mode}->label;
                   print $row->{$build_mode}->format;
-                  print $row->{$build_mode}->region;
-                  print $row->ds_weight;
+                  print '<div class="ds-dashboard-region">'. $row->{$build_mode}->region .'</div>';
+                  print '<div class="ds-dashboard-region">'. $row->ds_weight .'</div>';
                 ?>
               </div>
             </div>
