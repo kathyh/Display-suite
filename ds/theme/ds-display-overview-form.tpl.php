@@ -3,17 +3,13 @@
 
 /**
  * @file
- *   Template file for the display settings overview form
- *
- * @var
- * $build_mode String
- *   Current selected display mode
- * $rows Array of field objects
- *   Fields declared in drupal core and custom fields
- *   Properties (human_name, weight, stickyorder, build_mode, class, label_class)
+ * Template file for the display settings overview form, table drag style.
  */
 
-if ($rows): ?>
+if ($rows):
+
+print $dev_preview; // Remove this later.
+?>
 
 <div id="ds-display-content">
   <?php if (!empty($plugins_tabs)): ?>
@@ -40,7 +36,7 @@ if ($rows): ?>
       </thead>
       <tbody>
 
-      <!-- Node regions -->
+      <!-- Regions -->
       <?php foreach ($regions as $region => $title): ?>
         <tr class="region region-<?php print $region?>">
           <td colspan="6" class="region"><?php print $title; ?></td>

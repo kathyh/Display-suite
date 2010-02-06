@@ -1,38 +1,8 @@
 /* $Id: ds.css,v 1.1.2.9 2010/01/28 14:47:28 swentel Exp $ */
 
-// Display fields overview screen.
-#fields td.region {
-  font-weight: bold;
-}
-
-#fields tr.region-message {
-  font-weight: normal;
-  color: #999;
-}
-
-#fields tr.region-populated {
-  display: none;
-}
-
-.field-region {
-  background-color: #ff6;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  padding: 3px;
-}
-
-tr.region-css-disabled  {
-  filter:alpha(opacity=60);
-  -moz-opacity:0.6;
-  -khtml-opacity: 0.6;
-  opacity: 0.6;
-}
-
-.render-region .form-item {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
+/**
+ * General stuff 
+ */
 span.label-field, span.label-edit {
   padding:2px;
   font-size-adjust:none;
@@ -54,7 +24,7 @@ span.label-edit {
 }
 
 .ds-display {
-	display: block;
+  display: block;
 }
 
 .ds-hidden {
@@ -87,6 +57,9 @@ span.label-edit {
   background-color: #FFFFFF;
 }
 
+/** 
+ * Layout overview page
+ */
 #ds-overview-page .ds-row-title {
   font-weight: bold;
   background: #E4F0F8 none repeat scroll 0 0;
@@ -96,4 +69,116 @@ span.label-edit {
 #ds-overview-page .ds-row-type {
   background: #fff none repeat scroll 0 0;
   border: 0 none;
+}
+
+/**
+ * Table drag layout 
+ */
+#fields td.region {
+  font-weight: bold;
+}
+
+#fields tr.region-message {
+  font-weight: normal;
+  color: #999;
+}
+
+#fields tr.region-populated {
+  display: none;
+}
+
+.field-region {
+  background-color: #ff6;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  padding: 3px;
+}
+
+tr.region-css-disabled  {
+  filter:alpha(opacity=60);
+  -moz-opacity:0.6;
+  -khtml-opacity: 0.6;
+  opacity: 0.6;
+}
+
+.render-region .form-item {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/**
+ * Dashboard layout
+ */
+#ds-db-region-header {
+  clear: both;
+  width: 100%;
+}
+
+#ds-db-region-left {
+  clear: left;
+  float: left;
+  width: 32%;
+}
+
+#ds-db-region-middle {
+  clear: none;
+  width: 32%;
+}
+
+#ds-db-region-right {
+  float: right;
+  with: 32%;
+}
+
+#ds-db-region-footer {
+  clear: both;
+  width: 100%;
+}
+
+#ds-db-region-disabled {
+}
+
+.groupWrapper {
+  /*width: 32%;*/
+  float: left;
+  margin-right: 1%;
+  min-height: 32;
+}
+
+.groupItem {
+  margin-bottom: 20px;
+}
+
+.groupItem .itemHeader {
+  line-height: 28px;
+  background-color: #DAFF9F;
+  border-top: 2px solid #B5EF59;
+  color: #000;
+  padding: 0 10px;
+  cursor: move;
+  font-weight: bold;
+  font-size: 16px;
+  height: 28px;
+  position: relative;
+}
+
+.groupItem .itemHeader a {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-weight: normal;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.sortHelper {
+  border: 3px dashed #666;
+  width: auto !important;
+}
+
+.groupWrapper p {
+  height: 1px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }

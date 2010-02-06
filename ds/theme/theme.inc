@@ -142,7 +142,13 @@ function template_preprocess_ds_row_object(&$vars) {
 function template_preprocess_ds_display_overview_form(&$vars) {
   $form = &$vars['form'];
 
+  $layout = isset($_GET['layout']) ? 'dashboard' : 'tabledrag';
   $build_mode = $form['#build_mode'];
+  $regions = ds_regions(variable_get('ds_build_mode_'. $build_mode, 'all'));
+
+  // Determine which css and js to load.
+  $vars['dev_preview'] = '<p>'. l('Table drag style', $_GET['q']) .' - '. l('Dashboard style', $_GET['q'], array('query' => array('layout' => '1'))) .'</p>';
+  _template_preprocess_ds_display_overview_form($vars, $regions, $layout);
 
   // Order the fields.
   $order = array();
@@ -158,6 +164,9 @@ function template_preprocess_ds_display_overview_form(&$vars) {
 
     // Each field will have a region, store it temporarily
     $region = $element[$build_mode]['region']['#default_value'];
+
+    // Add field_id key
+    $row->field_id = $key;
 
     foreach (element_children($element) as $child) {
 
@@ -181,24 +190,15 @@ function template_preprocess_ds_display_overview_form(&$vars) {
     }
 
     // Add draggable.
-    $row->class = 'draggable';
-    if ($region == 'disabled') {
-      $row->class .= ' region-css-'. $region;
+    if ($layout == 'tabledrag') {
+      $row->class = 'draggable';
+      if ($region == 'disabled') {
+        $row->class .= ' region-css-'. $region;
+      }
     }
 
     $row->label_class = 'label-field';
     $rows[$region][] = $row;
-  }
-
-  drupal_add_js('misc/tableheader.js');
-  drupal_add_js(drupal_get_path('module', 'ds') .'/js/ds.js');
-  drupal_add_css(drupal_get_path('module', 'ds') .'/css/ds.css');
-
-  $regions = ds_regions(variable_get('ds_build_mode_'. $build_mode, 'all'));
-  foreach ($regions as $region => $title) {
-    drupal_add_tabledrag('fields', 'match', 'sibling', 'field-region-select', 'field-region-'. $region, NULL, FALSE);
-    // We need to have subgroups to make the dragging available within parents
-    drupal_add_tabledrag('fields', 'order', 'sibling', 'field-weight', 'field-weight-'. $region);
   }
 
   // Plugins available.
@@ -216,3 +216,38 @@ function template_preprocess_ds_display_overview_form(&$vars) {
   $vars['regions'] = $regions;
   $vars['build_mode'] = $build_mode;
 }
+
+/**
+ * Helper function to determine which layout we need to load. Can either
+ * be the tabledrag screen or the dashboard style layout.
+ *
+ * @param array $vars All variables build right now.
+ * @param array $regions All regions available.
+ * @param string $layout The layout to load.
+ */
+function _template_preprocess_ds_display_overview_form(&$vars, $regions, $layout) {
+
+  drupal_add_css(drupal_get_path('module', 'ds') .'/css/ds.css');
+  drupal_add_js(drupal_get_path('module', 'ds') .'/js/ds.js');
+
+  // Tabledrag layout.
+  if ($layout == 'tabledrag') {
+
+    drupal_add_js('misc/tableheader.js');
+    drupal_add_js(drupal_get_path('module', 'ds') .'/js/ds-tabledrag.js');
+
+    foreach ($regions as $region => $title) {
+      drupal_add_tabledrag('fields', 'match', 'sibling', 'field-region-select', 'field-region-'. $region, NULL, FALSE);
+      // We need to have subgroups to make the dragging available within parents
+      drupal_add_tabledrag('fields', 'order', 'sibling', 'field-weight', 'field-weight-'. $region);
+    }
+  }
+
+  // Dashboard layout.
+  if ($layout == 'dashboard') {
+    $vars['template_files'][] = 'ds-display-overview-dashboard-form';
+    drupal_add_js(drupal_get_path('module', 'ds') .'/js/interface.js');
+    drupal_add_js(drupal_get_path('module', 'ds') .'/js/ds-dashboard.js');
+  }
+}
+
