@@ -65,5 +65,5 @@ This is development code which you can find on <a href="http://github.com/swente
   <?php endif; ?>
 </div>
 <?php
-print '<div>'. $submit .'</div>';
+print '<div style="clear: both">'. $submit .'</div>';
 endif;
