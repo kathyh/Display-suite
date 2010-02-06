@@ -50,7 +50,7 @@ function saveLayoutSettings() {
 	var region_value = region.replace('ds-db-region-', '');
 	var fields = regions[region];
 	for (var i = 0; i < fields.length; i++) {
-	  var field_replace = fields[i].replace("_", "-"); 
+  	  var field_replace = fields[i].replace(/_/gi, "-"); 
 	  var weight_id = 'edit-'+ field_replace +'-ds-weight';
 	  var region_id = 'edit-'+ field_replace +'-'+ build_mode +'-region';
 	  $('#'+ weight_id).val(i);
