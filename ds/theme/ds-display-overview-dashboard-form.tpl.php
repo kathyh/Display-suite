@@ -41,12 +41,12 @@ This is development code which you can find on <a href="http://github.com/swente
               <div class="itemHeader"><?php print $row->human_name; ?><a href="#" class="closeEl">[+]</a></div>
               <div class="itemContent" style="display: none">
                 <?php
-                  print $row->{$build_mode}->label_value;
                   print $row->{$build_mode}->label_edit;
                   print $row->{$build_mode}->label;
                   print $row->{$build_mode}->format;
                   print '<div class="ds-dashboard-region">'. $row->{$build_mode}->region .'</div>';
                   print '<div class="ds-dashboard-region">'. $row->ds_weight .'</div>';
+                  print $row->{$build_mode}->label_value;
                 ?>
               </div>
             </div>
