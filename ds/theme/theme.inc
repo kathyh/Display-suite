@@ -144,7 +144,7 @@ function template_preprocess_ds_display_overview_form(&$vars) {
 
   $layout = $form['#layout'];
   $build_mode = $form['#build_mode'];
-  $regions = ds_regions(variable_get('ds_build_mode_'. $build_mode, 'all'));
+  $regions = ds_regions(variable_get('ds_build_mode_'. $build_mode, 'all'), $layout == 'tabledrag' ? FALSE : TRUE);
 
   // Determine which css and js to load.
   $vars['dev_preview'] = '<p>'. l('Table drag style', $_GET['q']) .' - '. l('Dashboard style', $_GET['q'], array('query' => array('layout' => '1'))) .'</p>';

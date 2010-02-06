@@ -122,12 +122,15 @@ tr.region-css-disabled  {
 
 #ds-db-region-middle {
   clear: none;
-  width: 32%;
+  width: 34%;
+  margin-left: 33%;
+  margin-right: 33%;
 }
 
 #ds-db-region-right {
   float: right;
-  with: 32%;
+  width: 32%;
+  margin-right: 0px;
 }
 
 #ds-db-region-footer {
@@ -141,9 +144,8 @@ tr.region-css-disabled  {
 
 .groupWrapper {
   /*width: 32%;*/
-  float: left;
   margin-right: 1%;
-  min-height: 32;
+  min-height: 32px;
 }
 
 .groupItem {
