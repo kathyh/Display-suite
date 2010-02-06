@@ -105,6 +105,9 @@ function ds_display_overview_form(&$form_state, $type, $build_mode = 'full', $mo
   $display_settings = variable_get($module .'_display_settings_'. $type, array());
   $settings_status = isset($display_settings[$build_mode]['status']) ? $display_settings[$build_mode]['status'] : DS_SETTINGS_UI;
 
+  // Layout style, revise this later.
+  $layout = isset($_GET['layout']) ? 'dashboard' : 'tabledrag';
+
   $form = array(
     '#tree' => TRUE,
     '#module' => $module,
@@ -114,7 +117,8 @@ function ds_display_overview_form(&$form_state, $type, $build_mode = 'full', $mo
     '#plugins' => FALSE,
     '#extra' => array(),
     '#status' => $settings_status,
-  );
+    '#layout' => $layout,
+   );
 
   // Extra info.
   if (isset($api_info['extra'])) {
@@ -133,13 +137,18 @@ function ds_display_overview_form(&$form_state, $type, $build_mode = 'full', $mo
   if (isset($api_info['plugins_exclude']) && in_array($build_mode, $api_info['plugins_exclude'])) {
     $plugins = FALSE;
   }
-  if ($plugins)
-  ds_plugins_display_form($form, $display_settings);
+  if ($plugins) {
+    ds_plugins_display_form($form, $display_settings);
+  }
 
+  // Submit. Add additional javascript if layout is dashboard style.
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
   );
+  if ($layout == 'dashboard') {
+    $form['submit']['#attributes'] = array('onClick' => 'saveLayoutSettings()');
+  }
 
   return $form;
 }

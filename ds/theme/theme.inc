@@ -142,7 +142,7 @@ function template_preprocess_ds_row_object(&$vars) {
 function template_preprocess_ds_display_overview_form(&$vars) {
   $form = &$vars['form'];
 
-  $layout = isset($_GET['layout']) ? 'dashboard' : 'tabledrag';
+  $layout = $form['#layout'];
   $build_mode = $form['#build_mode'];
   $regions = ds_regions(variable_get('ds_build_mode_'. $build_mode, 'all'));
 

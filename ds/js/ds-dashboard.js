@@ -44,6 +44,5 @@ var toggleContent = function(e) {
 
 function saveLayoutSettings() {
 	serial = $.SortSerialize();
-	alert(serial.hash);
 };
 
