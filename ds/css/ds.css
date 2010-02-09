@@ -3,7 +3,7 @@
 /**
  * General stuff 
  */
-span.label-field, span.label-edit {
+table span.label-field, table span.label-edit {
   padding:2px;
   font-size-adjust:none;
   font-stretch:normal;
@@ -13,12 +13,12 @@ span.label-field, span.label-edit {
   line-height:24px;
 }
 
-span.label-field {
+table span.label-field {
   font-size: 13px;
   float: left;
 }
 
-span.label-edit {
+table span.label-edit {
   font-size: 11px;
   float: right;
 }
@@ -113,6 +113,17 @@ tr.region-css-disabled  {
   display: none;
 }
  
+.ds-dashboard-label .label-edit {
+	float: left;
+} 
+.ds-dashboard-label .label-select {
+  float: left;
+}
+
+.ds-dashboard-format {
+  clear: both;
+}
+
 #ds-db-region-header {
   clear: both;
   width: 100%;

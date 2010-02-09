@@ -37,16 +37,18 @@ This is development code which you can find on <a href="http://github.com/swente
         if (!empty($rows[$region])):
           $count = 0;
           foreach ($rows[$region] as $row): ?>
-            <div id="<?php print $row->field_id; ?>" class="groupItem">
-              <div class="itemHeader"><?php print $row->human_name; ?><a href="#" class="closeEl">[+]</a></div>
+            <div id="<?php print $row->field_id; ?>" class="groupItem ds-label">
+              <div class="itemHeader">
+                <span class="<?php print $row->label_class; ?>"><?php print $row->human_name; ?></span>
+                <?php print $row->{$build_mode}->label_value; ?>
+                <a href="#" class="closeEl">[+]</a>
+              </div>
               <div class="itemContent" style="display: none">
                 <?php
-                  print $row->{$build_mode}->label_edit;
-                  print $row->{$build_mode}->label;
-                  print $row->{$build_mode}->format;
+                  print '<div class="ds-dashboard-label"><span class="label-edit">'. t('Label') .' : '. $row->{$build_mode}->label_edit .'</span><span class="label-select">'. $row->{$build_mode}->label .'</span></div>';
+                  print '<div class="ds-dashboard-format">'. $row->{$build_mode}->format .'</div>';
                   print '<div class="ds-dashboard-region">'. $row->{$build_mode}->region .'</div>';
                   print '<div class="ds-dashboard-region">'. $row->ds_weight .'</div>';
-                  print $row->{$build_mode}->label_value;
                 ?>
               </div>
             </div>
