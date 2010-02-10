@@ -52,9 +52,9 @@ function ds_layout_overview() {
             $row[] = $build_mode['title'];
             $row[] = ds_settings_status($settings_status);
 
-            $operations = l('Edit', 'admin/ds/layout/'. $type .'/'. $bkey);
+            $operations = l('Edit', 'admin/ds/layout/'. $type_url_str .'/'. $bkey);
             if (user_access('revert overridden settings') && $settings_status == DS_SETTINGS_OVERRIDDEN) {
-              $operations .= ' - '. l('Revert', 'admin/ds/tools/revert/'. $module .'/'. $type .'/'. $bkey);
+              $operations .= ' - '. l('Revert', 'admin/ds/tools/revert/'. $module .'/'. $type_url_str .'/'. $bkey);
             }
             $row[] = $operations;
             $rows[] = array('data' => $row, 'class' => 'ds-row-type');
