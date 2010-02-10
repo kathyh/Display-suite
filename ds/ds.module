@@ -77,6 +77,18 @@ function ds_theme() {
 }
 
 /**
+ * Implementation of hook_block().
+ */
+function ds_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      require_once('includes/ds.registry.inc');
+      return _ds_block_list();
+      break;
+  }
+}
+
+/**
  * Implementation of hook_views_api().
  */
 function ds_views_api() {

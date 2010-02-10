@@ -336,6 +336,36 @@ function _ds_register_build_modes() {
 }
 
 /**
+ * Return blocks.
+ */
+function _ds_block_list() {
+  $blocks = array();
+
+  foreach (module_implements('ds_api') as $module) {
+    $plugins = variable_get($module .'_plugin_settings', array());
+    if (!empty($plugins)) {
+      foreach ($plugins as $key => $data) {
+        if (isset($data['filename']) && isset($data['class'])) {
+          require_once($data['filename']);
+          $class = $data['class'];
+          $plugin = new $class();
+          if (method_exists($plugin, 'block_list')) {
+            $plugin->block_list($module, $blocks);
+          }
+        }
+      }
+    }
+  }
+
+  if (!empty($blocks)) {
+  }
+
+  //dsm($blocks);
+  return array();
+  return $blocks;
+}
+
+/**
  * Return ds plugins.
  */
 function _ds_plugins() {
@@ -354,6 +384,14 @@ function _ds_plugins() {
       'class' => 'ds_cssoverrider',
       'description' => t('Override region CSS with inline styles or add extra classes.'),
       'file' => 'ds_cssoverrider.inc',
+      'path' => $path .'/plugins',
+      'target' => 'all',
+    ),
+    'regiontoblock' => array(
+      'title' => t('Region to block'),
+      'class' => 'ds_regiontoblock',
+      'description' => t('Render a display suite region into a theme region. That region will be made available as a block.'),
+      'file' => 'ds_regiontoblock.inc',
       'path' => $path .'/plugins',
       'target' => 'all',
     ),
